@@ -1,27 +1,3 @@
-# Project Charter — ECO 6810 Final Project
-
-> Need the big picture first? Read the [Final Project brief](./FINAL_PROJECT.md) before you fill this out.
->
-> **What this is.** Your short approved project plan. It tells me what you are trying to do, what data you will use, what your main metric is, and what a good result would look like.
->
-> **What this is not.** A brainstorm or a long proposal. Keep it short, specific, and concrete.
->
-> **Why we use it.** It keeps the project focused. Once this is approved, the milestone and the final submission are judged against this plan, not against shifting expectations later.
->
-> **How to fill it.** Copy this file. Answer every field. Keep it under two pages. If a field asks for a number, give a real number with a unit.
->
-> **Where this lives.** Fill this out inside your team GitHub repo. That repo is where we will review and approve the charter.
->
-> **How approval works.** Revise `CHARTER.md` in the repo until it is approved. Do not treat the charter as a separate detached file living somewhere else.
->
-> **Simplest editing path.** Open `CHARTER.md` on GitHub, click the pencil icon, edit the file, and commit the change.
->
-> **After approval.** One teammate can freeze the approved version as a PDF with:
-> `pandoc CHARTER.md -o charter_approved.pdf`
-> Then commit that PDF to the repo as the locked approved copy.
-
----
-
 ## Header
 
 | Field | Value |
