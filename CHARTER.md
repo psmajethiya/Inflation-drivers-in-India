@@ -57,23 +57,13 @@ Out-of-sample RMSE on the 2022-01 to 2025-12 held-out slice must be at least 20%
 
 ## 4. Baseline to beat
 
-The naive or prior number your threshold is measured against. Examples:
-
-- A previous study's coefficient or error.
-- A simple AR(1) or last-value forecast.
-- An unadjusted before-after difference.
-
-State **what the baseline produces numerically** if you know it, or how you will compute it before the checkpoint if you do not. You must compute the baseline *before* you build anything fancy.
-
-*Write here:*
+AR(1) on m/m CPI inflation, fit on Jan 2015 – Dec 2021, evaluated on Jan 2022 – Dec 2025. We will compute this baseline RMSE before any model building and commit it to `outputs/baseline_metric.json`. A linear VECM (Dua-Goel-style with our variable set) is reported as a secondary baseline.
 
 ---
 
 ## 5. Falsifiable hypothesis
 
-One sentence the data can prove wrong. A sign, a threshold, or a rank ordering. Not "we will analyse X" — "X will be greater than Y by at least Z".
-
-*Write here:*
+During the 2022-04 to 2023-03 window, the cumulative attribution assigned to external shocks (Brent + INR/USD) will exceed the cumulative attribution assigned to policy (repo rate) by at least 10 percentage points and will also exceed the cumulative attribution assigned to domestic demand (IIP). We impose a 10 percentage point margin to ensure that the dominance of external shocks is economically meaningful rather than driven by marginal differences in attribution.
 
 ---
 
@@ -112,28 +102,16 @@ Login required: no.
 
 ## 7. Scope limits
 
-Bullet list of things you are **not** claiming and **not** responsible for. Examples:
-
-- "We will not estimate a structural causal effect of monetary policy."
-- "We will not harmonise district boundaries across NFHS rounds; analysis is at state level."
-- "We will not ship a mobile version of the app."
-
-This section protects you at grading time. If you clearly say "we are not doing X," you will not be graded on X.
-
-*Write here:*
+- We will **not** estimate a structural causal effect of monetary policy. Any policy-attribution number we report is predictive/associational, not causal.
+- We will **not** produce forecasts beyond the sample period (Jan 2015 – Dec 2025).
+- If time permits, we may include a **lightweight exploratory dashboard** for inspecting trends and attribution shares on the held-out window. It is optional, not part of the grading core, and will **not** be production-grade, include user authentication, or update in real time.
+- We will **not** model food-price or core CPI sub-indices separately. All-items CPI is the only outcome.
 
 ---
 
 ## 8. Risks and fallback
 
-One named failure mode, and the fallback analysis you will run if it materialises. Examples:
-
-- "If the 2022-23 PPAC data is not released by the checkpoint, we will use the FY 2021-22 panel and document the truncation."
-- "If DiD parallel-trends fails visually, we fall back to a state-fixed-effects panel regression with year trends and report both."
-
-One risk is enough. Two is fine. Zero means you have not thought hard enough.
-
-*Write here:*
+- **Risk**: Double ML is likely too fragile for a small monthly sample with correlated macro regressors. **Fallback**: use a parsimonious regularized dynamic regression (ARX / ridge with lagged CPI, repo rate, oil, FX, and IIP), and report coefficient-based or scenario-based attribution rather than causal attribution.
 
 ---
 
@@ -141,11 +119,11 @@ One risk is enough. Two is fine. Zero means you have not thought hard enough.
 
 Your final repo must satisfy all of these:
 
-- [ ] `uv run main.py` runs end-to-end in under 10 minutes on a clean machine with no manual intervention.
-- [ ] It writes `outputs/primary_metric.json` containing a single JSON object with at least `{"metric_name": "...", "value": <number>, "threshold": <number>, "passed": <bool>}`.
-- [ ] It writes `outputs/baseline_metric.json` in the same shape.
-- [ ] A `README.md` documents the commands and expected outputs in ≤ 20 lines.
-- [ ] All data sources are either fetched in-script or committed under `data/` with a licence note.
+- [x] `uv run main.py` runs end-to-end in under 10 minutes on a clean machine with no manual intervention.
+- [x] It writes `outputs/primary_metric.json` containing a single JSON object with at least `{"metric_name": "...", "value": <number>, "threshold": <number>, "passed": <bool>}`.
+- [x] It writes `outputs/baseline_metric.json` in the same shape.
+- [x] A `README.md` documents the commands and expected outputs in ≤ 20 lines.
+- [x] All data sources are either fetched in-script or committed under `data/` with a licence note.
 
 If you cannot commit to this, your project is probably still too broad. Talk to the instructor before proceeding.
 
@@ -155,4 +133,4 @@ If you cannot commit to this, your project is probably still too broad. Talk to 
 
 By submitting this charter, the team agrees that this is the plan the project will be graded against. The instructor will not penalize you just because the topic turns out to be difficult, as long as the project stays honest and within the approved scope.
 
-*Signed:* _(team member names)_
+*Signed:* Hasil Tewari, Sandipan Ganguly, Parmeet Singh Majethiya
