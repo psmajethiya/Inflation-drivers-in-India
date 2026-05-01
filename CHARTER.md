@@ -45,7 +45,7 @@ During the 2022-04 to 2023-03 window, the cumulative attribution assigned to ext
 
 ## 6. Data sources and access plan
 
-All sources are open-access and require no login or API key.
+Most sources are open-access and require no login or API key. EPWRF access is available via institutional subscription.
 
 MoSPI CPI (all-India combined, monthly):
 Landing: https://www.mospi.gov.in/cpi
